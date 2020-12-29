@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>WallStreetBeggars</title>
+
+    <!-- import the webpage's stylesheet -->
+
+    <!-- import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    <h1>Wall Street Beggars</h1>
+
+    <p>Top Indexes</p>
+    {% for png in pngs %}
+    <tr>
+      <img
+        src="{{url_for('send_image', filename = png)}}"
+        height="400"
+        width="500"
+      />
+    </tr>
+    {% endfor %}
+  </body>
+</html>
