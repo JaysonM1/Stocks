@@ -1,4 +1,5 @@
 from pandas_datareader import data
+import pandas as pd
 import matplotlib
 matplotlib.use("agg")
 import matplotlib.pyplot as plt
@@ -12,6 +13,9 @@ def getTicks():
         ticks[i] = x.strftime('%m/%d')
         i= i - 1
     return ticks
+
+
+
 today = date.today()
 oneWeek = date.today() + relativedelta(weeks=-1)
 currentDate = today.strftime("%Y/%m/%d")
@@ -19,21 +23,20 @@ oneWeekAgo = oneWeek.strftime("%Y/%m/%d")
 indexes = [["^dji", "Dow Jones"],['^ixic','NASDAQ'],['^rut',"Russell 2000"], ['^gspc',"S&P 500"]]
 
 
-def makeGraph(prices, stock):
+def makeGraph(prices, stock,file):
     plt.figure()
     plt.title(stock, loc = 'center')
     plt.xlabel("Date")
     plt.ylabel("Adjusted Close")
     plt.plot(prices)
-    plt.savefig("indexes/"+stock)
+    plt.savefig(file + stock)
     
     
 def graphIndexes():
   graphs =[]
   for index in indexes:
         prices = data.DataReader(index[0], start= oneWeekAgo, end= currentDate, data_source='yahoo')['Adj Close']
-        volume = data.DataReader(index[0], start= oneWeekAgo, end= currentDate, data_source='yahoo')['Volume']
-        graphs.append(makeGraph(prices, index[1]))
+        graphs.append(makeGraph(prices, index[1],"indexes/"))
   
 
 def makeList(stocks):
@@ -53,10 +56,10 @@ def getGainers():
     return makeList(gainers)
 
 def graphGainers(topGainers):
+    gainers = []
     for gainer in topGainers:
         prices = data.DataReader(gainer[0], start= oneWeekAgo, end= currentDate, data_source='yahoo')['Adj Close']
-        volume = data.DataReader(gainer[0], start= oneWeekAgo, end= currentDate, data_source='yahoo')['Volume']
-        makeGraph(prices, gainer[1])
+        gainers.append(makeGraph(prices, gainer[1],"gainers/"))
     
 def getLosers():
     losers = pd.read_html('https://finance.yahoo.com/losers')
@@ -64,20 +67,14 @@ def getLosers():
     return makeList(losers)
     
 
-def graphLosers(topLosers,currentDate,oneWeekAgo):
+def graphLosers(topLosers):
+    losers = []
     for loser in topLosers:
         prices = data.DataReader(loser[0], start= oneWeekAgo, end= currentDate, data_source='yahoo')['Adj Close']
-        makeGraph(prices, loser[1])
+        losers.append(makeGraph(prices, loser[1],"losers/"))
     
-def main():
-    indexes = [["^dji", "Dow Jones"],['^ixic','NASDAQ'],['^rut',"Russell 2000"], ['^gspc',"S&P 500"]]
-    for index in graphIndexes():
-        plt.show()
+def run():
+    graphIndexes()
+    graphGainers(getGainers())
+    graphLosers(getLosers())
     
-    #graphGainers(getGainers(),currentDate,oneWeekAgo)
-    
-    #graphLosers(getLosers(), currentDate, oneWeekAgo)  
-    
-
-if __name__ == "__main__":
-    main()

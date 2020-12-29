@@ -7,12 +7,19 @@ import os
 app = Flask(__name__)
 @app.route('/upload/<filename>')
 def send_image(filename):
-  return send_from_directory("indexes",filename)
+  if (filename in os.listdir('./indexes')):
+    return send_from_directory("indexes",filename)
+  elif (filename in os.listdir('./gainers')):
+    return send_from_directory("gainers",filename)
+  else:
+    return send_from_directory("losers",filename)
 @app.route("/")
 def home():
-  pngs = os.listdir('./indexes')
-  return render_template("index.html", pngs = pngs)
+  indexes = os.listdir('./indexes')
+  gainers = os.listdir('./gainers')
+  losers = os.listdir('./losers')
+  return render_template("index.html", ind = indexes, ga = gainers, losers = losers)
   
 if __name__ == "__main__":
-  stocks.graphIndexes()
+  stocks.run()
   app.run()

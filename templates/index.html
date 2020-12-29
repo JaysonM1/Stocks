@@ -16,12 +16,33 @@
     <h1>Wall Street Beggars</h1>
 
     <p>Top Indexes</p>
-    {% for png in pngs %}
+    {% for i in ind %}
     <tr>
       <img
-        src="{{url_for('send_image', filename = png)}}"
-        height="400"
-        width="500"
+        src="{{url_for('send_image', filename = i)}}"
+        height="450"
+        width="460"
+      />
+    </tr>
+    {% endfor %}
+
+    <p>Top Gainers</p>
+    {% for g in ga%}
+    <tr>
+      <img
+        src="{{url_for('send_image',filename = g)}}"
+        height="450"
+        width="460"
+      />
+    </tr>
+    {% endfor %}
+    <p>Top Losers</p>
+    {% for l in losers%}
+    <tr>
+      <img
+        src="{{url_for('send_image',filename = l)}}"
+        height="450"
+        width="460"
       />
     </tr>
     {% endfor %}
