@@ -5,12 +5,15 @@ import os
 
 
 app = Flask(__name__)
+
+dailyIndexes = stocks.graphIndexes()
+dailyGainers = stocks.graphGainers(stocks.getGainers())
 @app.route('/upload/<filename>')
 def send_image(filename):
-  if (filename in os.listdir('./indexes')):
+  if (filename in os.listdir("indexes/")):
     return send_from_directory("indexes",filename)
-  elif (filename in os.listdir('./gainers')):
-    return send_from_directory("gainers",filename)
+  elif(filename in os.listdir("gainers/")):
+   return send_from_directory("gainers",filename)
   else:
     return send_from_directory("losers",filename)
 @app.route("/")
