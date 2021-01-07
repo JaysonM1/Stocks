@@ -5,25 +5,99 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>WallStreetBeggars</title>
+    <title>Morgado</title>
 
     <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
 
     <!-- import the webpage's javascript file -->
     <script src="/script.js" defer></script>
   </head>
   <body>
-    <h1>Wall Street Beggars</h1>
+    <h1>Morgado's Stocks</h1>
+    <p>
+      Top Indexes
+    </p>
+    <iframe
+      width="450"
+      height="600"
+      frameborder="0"
+      scrolling="no"
+      src="//plotly.com/~jaysonm1/25.embed"
+    ></iframe>
+    <iframe
+      width="450"
+      height="600"
+      frameborder="0"
+      scrolling="no"
+      src="//plotly.com/~jaysonm1/23.embed"
+    ></iframe>
+    <iframe
+      width="450"
+      height="600"
+      frameborder="0"
+      scrolling="no"
+      src="//plotly.com/~jaysonm1/21.embed"
+    ></iframe>
+    <iframe
+      width="450"
+      height="600"
+      frameborder="0"
+      scrolling="no"
+      src="//plotly.com/~jaysonm1/19.embed"
+    ></iframe>
+    <p>
+      Daily Gainers
+    </p>
+    <iframe
+      width="450"
+      height="600"
+      frameborder="0"
+      scrolling="no"
+      src="//plotly.com/~jaysonm1/114.embed"
+    ></iframe>
+    <iframe
+      width="450"
+      height="600"
+      frameborder="0"
+      scrolling="no"
+      src="//plotly.com/~jaysonm1/122.embed"
+    ></iframe>
+    <iframe
+      width="450"
+      height="600"
+      frameborder="0"
+      scrolling="no"
+      src="//plotly.com/~jaysonm1/112.embed"
+    ></iframe>
 
-    <p>Top Indexes</p>
-    {% for png in pngs %}
-    <tr>
-      <img
-        src="{{url_for('send_image', filename = png)}}"
-        height="400"
-        width="500"
-      />
-    </tr>
-    {% endfor %}
+    <p>
+      Daily Losers
+    </p>
+    <iframe
+      width="450"
+      height="600"
+      frameborder="0"
+      scrolling="no"
+      src="//plotly.com/~jaysonm1/141.embed"
+    ></iframe>
+    <iframe
+      width="450"
+      height="600"
+      frameborder="0"
+      scrolling="no"
+      src="//plotly.com/~jaysonm1/143.embed"
+    ></iframe>
+    <iframe
+      width="450"
+      height="600"
+      frameborder="0"
+      scrolling="no"
+      src="//plotly.com/~jaysonm1/145.embed"
+    ></iframe>
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js" defer></script>
   </body>
 </html>
